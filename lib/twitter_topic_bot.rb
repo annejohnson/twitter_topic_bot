@@ -1,4 +1,4 @@
-require "twitter_topic_bot/version"
+require 'twitter_topic_bot/version'
 
 module TwitterTopicBot
   # Your code goes here...
