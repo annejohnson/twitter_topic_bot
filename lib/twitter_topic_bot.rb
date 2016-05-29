@@ -24,9 +24,7 @@ class TwitterTopicBot
   end
 
   def retweet_mentions
-    api_client.mentions.map do |mention|
-      break unless api_client.retweet(mention)
-    end
+    api_client.retweet *api_client.mentions
   end
 
   def reply_to_someone
@@ -44,8 +42,9 @@ class TwitterTopicBot
 
   def follow_followers
     already_following_user_ids = api_client.following.map(&:id)
-    api_client.followers.each do |follower|
-      next if already_following_user_ids.include?(follower.id)
+    api_client.followers.reject do |follower|
+      already_following_user_ids.include?(follower.id)
+    end.each do |follower|
       api_client.follow(follower)
     end
   end

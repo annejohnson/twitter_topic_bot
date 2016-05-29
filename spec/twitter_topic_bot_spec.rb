@@ -33,7 +33,7 @@ describe TwitterTopicBot do
 
     it 'retweets someone who has tweeted about the topic' do
       expect(api_client).to receive(:retweet).
-        with(topic_tweet.id)
+        with([topic_tweet.id])
       subject.retweet_someone
     end
   end
@@ -68,8 +68,7 @@ describe TwitterTopicBot do
 
     it 'retweets mentions' do
       expect(api_client).to receive(:retweet).
-        with(kind_of(Numeric)).
-        exactly(mention_tweets.size).times
+        with(mention_tweets.map(&:id))
       subject.retweet_mentions
     end
   end

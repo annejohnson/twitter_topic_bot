@@ -26,8 +26,8 @@ class TwitterTopicBot
       twitter_client.update(str, options)
     end
 
-    def retweet(tweet)
-      twitter_client.retweet(tweet.id)
+    def retweet(*tweets)
+      twitter_client.retweet(tweets.map(&:id))
     rescue Twitter::Error::Forbidden
       false
     end
