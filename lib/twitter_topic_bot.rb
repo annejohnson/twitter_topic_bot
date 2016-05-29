@@ -24,6 +24,7 @@ class TwitterTopicBot
   end
 
   def retweet_mentions
+    # TODO: filter out already retweeted mentions
     api_client.retweet *api_client.mentions
   end
 
@@ -41,6 +42,7 @@ class TwitterTopicBot
   end
 
   def follow_followers
+    # TODO: it is too easy to hit the rate limit on this one
     api_client.follow *api_client.followers
   end
 
