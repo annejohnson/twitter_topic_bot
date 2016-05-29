@@ -12,6 +12,8 @@ describe TwitterTopicBot do
       and_return(api_client)
   end
 
+  it_behaves_like 'a schedulable'
+
   describe '#tweet' do
     it 'tweets about the topic' do
       expect(api_client).to receive(:update).
@@ -105,38 +107,6 @@ describe TwitterTopicBot do
       expect(api_client).to receive(:follow).
         with(*api_client.followers.map(&:id))
       subject.follow_followers
-    end
-  end
-
-  describe '#schedule' do
-    let(:scheduler_class) { Rufus::Scheduler }
-    let(:schedule) { instance_double(scheduler_class) }
-
-    before :each do
-      expect(scheduler_class).to receive(:new).
-        and_return(schedule)
-      allow(subject).to receive(:tweet).
-        and_return(true)
-    end
-
-    it 'schedules a task with every' do
-      time_interval = '3m'
-      expect(schedule).to receive(:every).
-        with(time_interval).and_yield
-
-      subject.schedule do |schedule|
-        schedule.every(time_interval) { subject.tweet }
-      end
-    end
-
-    it 'schedules a task with cron' do
-      cron_setting = '15,45 * * * *'
-      expect(schedule).to receive(:cron).
-        with(cron_setting).and_yield
-
-      subject.schedule do |schedule|
-        schedule.cron(cron_setting) { subject.tweet }
-      end
     end
   end
 end
