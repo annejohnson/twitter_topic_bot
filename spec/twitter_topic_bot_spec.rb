@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe TwitterTopicBot do
-
-  subject { described_class.new(content_preparer, twitter_api_credentials) }
+  subject do
+    described_class.new(content_preparer, twitter_api_credentials)
+  end
 
   let(:api_client) { twitter_rest_client }
 
@@ -20,37 +21,37 @@ describe TwitterTopicBot do
   end
 
   describe '#retweet_someone' do
-    let(:topic_tweets) do
-      twitter_tweet_collection(substring: content_preparer.topic_string)
+    let(:topic_tweet) do
+      twitter_tweet(substring: content_preparer.topic_string)
     end
 
     before :each do
       expect(api_client).to receive(:search).
         with(content_preparer.topic_string, any_args).
-        and_return(topic_tweets)
+        and_return([topic_tweet])
     end
 
     it 'retweets someone who has tweeted about the topic' do
       expect(api_client).to receive(:retweet).
-        with(kind_of(Numeric))
+        with(topic_tweet.id)
       subject.retweet_someone
     end
   end
 
   describe '#follow_someone' do
-    let(:topic_tweets) do
-      twitter_tweet_collection(substring: content_preparer.topic_string)
+    let(:topic_tweet) do
+      twitter_tweet(substring: content_preparer.topic_string)
     end
 
     before :each do
       expect(api_client).to receive(:search).
         with(content_preparer.topic_string, any_args).
-        and_return(topic_tweets)
+        and_return([topic_tweet])
     end
 
     it 'follows someone who has tweeted about the topic' do
       expect(api_client).to receive(:follow).
-        with(kind_of(Numeric))
+        with(topic_tweet.user.id)
       subject.follow_someone
     end
   end
@@ -101,9 +102,17 @@ describe TwitterTopicBot do
   end
 
   describe '#follow_followers' do
-    it 'follows its followers' do
+    let(:already_followed_followers) { api_client.following }
+    let(:not_yet_followed_followers) do
+      api_client.followers.reject do |follower|
+        already_followed_followers.map(&:id).include?(follower.id)
+      end
+    end
+
+    it 'follows its not-yet-followed followers' do
       expect(api_client).to receive(:follow).
-        with(kind_of(Numeric))
+        with(kind_of(Numeric)).
+        exactly(not_yet_followed_followers.size).times
       subject.follow_followers
     end
   end
