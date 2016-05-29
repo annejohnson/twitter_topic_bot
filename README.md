@@ -83,11 +83,17 @@ bot.schedule do |schedule|
   schedule.every('30m') { bot.tweet }
   schedule.every('3h') { bot.follow_someone }
   schedule.every('1d') { bot.reply_to_someone }
-  schedule.cron('15,45 * * * *') { bot.retweet_mentions }
+  schedule.cron('15,45 * * * *') { bot.retweet_someone }
 end
 ```
 
 View the [Rufus-Scheduler](https://github.com/jmettraux/rufus-scheduler) documentation to see examples of how to configure the schedule.
+
+For the schedule take effect over time, you need to keep your process open. You can add the following to your Ruby file to keep the process running indefinitely:
+
+```ruby
+loop { sleep 1 }
+```
 
 ### Launching Your Bot
 
