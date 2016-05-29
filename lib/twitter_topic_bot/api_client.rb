@@ -54,7 +54,7 @@ class TwitterTopicBot
 
     def tweets
       twitter_client.user_timeline(
-        twitter_client.user(username),
+        username,
         count: max_num_tweets_per_query
       )
     end
