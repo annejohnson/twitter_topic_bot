@@ -105,7 +105,7 @@ ruby my_bot.rb
 
 ### Example File
 
-The code above is available in this (example file)[https://github.com/annejohnson/twitter_topic_bot/blob/master/examples/art_topic_bot.rb].
+The code above is available in this [example file](https://github.com/annejohnson/twitter_topic_bot/blob/master/examples/art_topic_bot.rb).
 
 ## Development
 
