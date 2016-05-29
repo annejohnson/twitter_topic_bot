@@ -79,11 +79,11 @@ bot.follow_followers
 To make your bot run automatically on a schedule, define a schedule for it as follows:
 
 ```ruby
-bot.schedule do
-  every '30m', :tweet
-  every '3h', :follow_someone
-  every '1d', :reply_to_someone
-  cron '15,45 * * * *', :retweet_mentions
+bot.schedule do |schedule|
+  schedule.every('30m') { bot.tweet }
+  schedule.every('3h') { bot.follow_someone }
+  schedule.every('1d') { bot.reply_to_someone }
+  schedule.cron('15,45 * * * *') { bot.retweet_mentions }
 end
 ```
 

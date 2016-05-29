@@ -1,8 +1,11 @@
 require 'twitter_topic_bot/version'
 require 'twitter_topic_bot/api_client'
 require 'twitter_topic_bot/tweet_filterer'
+require 'twitter_topic_bot/schedulable'
 
 class TwitterTopicBot
+  include Schedulable
+
   def initialize(content_preparer, credentials)
     @content_preparer = content_preparer
     @api_client = TwitterTopicBot::ApiClient.new(credentials)
