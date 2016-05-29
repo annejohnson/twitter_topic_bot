@@ -1,5 +1,8 @@
 # TwitterTopicBot
 
+[![Gem](https://img.shields.io/gem/v/twitter_topic_bot.svg?style=flat-square)](https://rubygems.org/gems/twitter_topic_bot)
+[![Travis](https://img.shields.io/travis/annejohnson/twitter_topic_bot.svg?style=flat-square)](https://travis-ci.org/annejohnson/twitter_topic_bot)
+
 Create a Twitter bot in 5 minutes that tweets and engages with the community on topics you're interested in!
 
 ## Installation
