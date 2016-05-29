@@ -1,8 +1,6 @@
 # TwitterTopicBot
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/twitter_topic_bot`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Create a Twitter bot in 5 minutes that tweets and engages with the community on topics you're interested in!
 
 ## Installation
 
@@ -22,13 +20,54 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To let your bot know what to tweet about, you need to make an object that responds to the three methods in the code sample below. The topic below is art, but your topic can be about anything.
+
+```
+class ArtContentPreparer
+  def topic_string
+    ['#painting', '#watercolor'].sample
+  end
+
+  def prepare_tweet
+    %q{If you hear a voice within you say 'you cannot paint,' then by all means paint, and that voice will be silenced. -Vincent Van Gogh}
+  end
+
+  def prepare_reply(tweet_to_reply_to, user_to_reply_to)
+    "@#{user_to_reply_to}, thank you for tweeting about art!"
+  end
+end
+
+content_preparer = ArtContentPreparer.new
+```
+
+Next, get your Twitter API credentials ready. Register an app on [Twitter](https://apps.twitter.com/) with read & write permissions. Once you have your API keys, prepare the following pieces of information:
+
+```
+credentials = {
+  username: '<Your bot\'s username (without the @ sign)>',
+  consumer_key: '<Your consumer key>',
+  consumer_secret: '<Your consumer secret>',
+  access_token: '<Your access token>',
+  access_token_secret: '<Your access token secret>'
+}
+```
+
+Next, instantiate a `TwitterTopicBot`, and make it do things!
+
+```
+bot = TwitterTopicBot.new(content_preparer, credentials)
+
+bot.tweet
+bot.retweet_someone
+bot.follow_someone
+bot.retweet_mentions
+bot.reply_to_someone
+bot.follow_followers
+```
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
