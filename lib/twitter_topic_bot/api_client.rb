@@ -27,13 +27,13 @@ class TwitterTopicBot
     end
 
     def retweet(*tweets)
-      twitter_client.retweet(tweets.map(&:id))
+      twitter_client.retweet(*tweets.map(&:id))
     rescue Twitter::Error::Forbidden
       false
     end
 
-    def follow(user)
-      twitter_client.follow(user.id)
+    def follow(*users)
+      twitter_client.follow(*users.map(&:id))
     end
 
     def search_recent_tweets(query_str)
