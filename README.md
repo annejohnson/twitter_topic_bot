@@ -51,7 +51,7 @@ Next, get your Twitter API credentials ready. Register an app on [Twitter](https
 
 ```ruby
 credentials = {
-  username: '<Your bot\'s username (without the @ sign)>',
+  username: '<Your bot\'s Twitter username (without the @ sign)>',
   consumer_key: '<Your consumer key>',
   consumer_secret: '<Your consumer secret>',
   access_token: '<Your access token>',
@@ -76,7 +76,7 @@ bot.follow_followers
 
 ### Automating Your Bot's Activities
 
-To make your bot run automatically on a schedule, define a schedule for it as follows:
+To make your bot run automatically on a schedule, define a schedule for it like so:
 
 ```ruby
 bot.schedule do |schedule|
@@ -87,11 +87,11 @@ bot.schedule do |schedule|
 end
 ```
 
-View the [Rufus-Scheduler](https://github.com/jmettraux/rufus-scheduler) documentation to see other examples of how to configure the schedule.
+View the [Rufus-Scheduler](https://github.com/jmettraux/rufus-scheduler) documentation to see examples of how to configure the schedule.
 
 ### Launching Your Bot
 
-If you Ruby code so far is in a file called `my_bot.rb`, you can launch your bot with the following command in the terminal:
+If your Ruby code so far is in a file called `my_bot.rb`, you can launch your bot with the following command in the terminal:
 
 ```
 ruby my_bot.rb
