@@ -1,4 +1,3 @@
-require 'twitter'
 require 'twitter_topic_bot/version'
 require 'twitter_topic_bot/api_client'
 require 'twitter_topic_bot/tweet_filterer'
