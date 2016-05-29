@@ -101,16 +101,9 @@ describe TwitterTopicBot do
   end
 
   describe '#follow_followers' do
-    let(:already_followed_followers) { api_client.following }
-    let(:not_yet_followed_followers) do
-      api_client.followers.reject do |follower|
-        already_followed_followers.map(&:id).include?(follower.id)
-      end
-    end
-
     it 'follows its not-yet-followed followers' do
       expect(api_client).to receive(:follow).
-        with(*not_yet_followed_followers.map(&:id))
+        with(*api_client.followers.map(&:id))
       subject.follow_followers
     end
   end

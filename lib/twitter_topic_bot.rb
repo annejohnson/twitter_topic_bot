@@ -41,11 +41,7 @@ class TwitterTopicBot
   end
 
   def follow_followers
-    already_following_user_ids = api_client.following.map(&:id)
-    users_to_follow = api_client.followers.reject do |follower|
-      already_following_user_ids.include?(follower.id)
-    end
-    api_client.follow *users_to_follow
+    api_client.follow *api_client.followers
   end
 
   private
