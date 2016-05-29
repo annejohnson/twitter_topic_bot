@@ -29,36 +29,12 @@ describe TwitterTopicBot do
 
   subject { described_class.new(content_preparer, twitter_api_credentials) }
   let(:api_client) { instance_double(Twitter::REST::Client) }
-  let(:topic_tweet_user) { instance_double(Twitter::User) }
-  let(:mention_tweet_user) { instance_double(Twitter::User) }
-  let(:topic_tweet) { instance_double(Twitter::Tweet) }
-  let(:mention_tweet) { instance_double(Twitter::Tweet) }
+  let(:topic_tweet) { twitter_tweet(content_preparer.topic_string) }
+  let(:mention_tweet) { twitter_tweet('@twittertopicbot') }
 
   before :each do
     expect(Twitter::REST::Client).to receive(:new).
       and_return(api_client)
-    # mock user
-    [mention_tweet_user, topic_tweet_user].each do |user|
-      allow(user).to receive(:id).
-        and_return((1..500).to_a.sample)
-    end
-    # mock tweet
-    [mention_tweet, topic_tweet].each do |tweet|
-      allow(tweet).to receive(:id).
-        and_return((1..500).to_a.sample)
-      allow(tweet).to receive(:lang).
-        and_return('en')
-      allow(tweet).to receive(:favorite_count).
-        and_return((0..10).to_a.sample)
-    end
-    allow(topic_tweet).to receive(:text).
-      and_return("Can you believe yesterday's headline? #currentEvents")
-    allow(topic_tweet).to receive(:user).
-      and_return(topic_tweet_user)
-    allow(mention_tweet).to receive(:text).
-      and_return('Hey, @twitter_topic_bot, thanks for following!')
-    allow(mention_tweet).to receive(:user).
-      and_return(mention_tweet_user)
   end
 
   describe '#tweet' do
