@@ -22,7 +22,7 @@ Or install it yourself as:
 
 To let your bot know what to tweet about, you need to make an object that responds to the three methods in the code sample below. The topic below is art, but your topic can be about anything.
 
-```
+```ruby
 class ArtContentPreparer
   def topic_string
     ['#painting', '#watercolor'].sample
@@ -42,7 +42,7 @@ content_preparer = ArtContentPreparer.new
 
 Next, get your Twitter API credentials ready. Register an app on [Twitter](https://apps.twitter.com/) with read & write permissions. Once you have your API keys, prepare the following pieces of information:
 
-```
+```ruby
 credentials = {
   username: '<Your bot\'s username (without the @ sign)>',
   consumer_key: '<Your consumer key>',
@@ -54,7 +54,7 @@ credentials = {
 
 Next, instantiate a `TwitterTopicBot`, and make it do things!
 
-```
+```ruby
 bot = TwitterTopicBot.new(content_preparer, credentials)
 
 bot.tweet
