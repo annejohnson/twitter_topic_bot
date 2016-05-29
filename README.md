@@ -23,6 +23,8 @@ Or install it yourself as:
 
 ## Usage
 
+### Telling Your Bot What to Tweet
+
 To let your bot know what to tweet about, you need to make an object that responds to the three methods in the code sample below. The topic below is art, but your topic can be about anything.
 
 ```ruby
@@ -43,6 +45,8 @@ end
 content_preparer = ArtContentPreparer.new
 ```
 
+### Getting Twitter Credentials
+
 Next, get your Twitter API credentials ready. Register an app on [Twitter](https://apps.twitter.com/) with read & write permissions. Once you have your API keys, prepare the following pieces of information:
 
 ```ruby
@@ -55,6 +59,8 @@ credentials = {
 }
 ```
 
+### Making Your Bot Interact with the World
+
 Next, instantiate a `TwitterTopicBot`, and make it do things!
 
 ```ruby
@@ -66,6 +72,29 @@ bot.follow_someone
 bot.retweet_mentions
 bot.reply_to_someone
 bot.follow_followers
+```
+
+### Automating Your Bot's Activities
+
+To make your bot run automatically on a schedule, define a schedule for it as follows:
+
+```ruby
+bot.schedule do
+  every '30m', :tweet
+  every '3h', :follow_someone
+  every '1d', :reply_to_someone
+  cron '15,45 * * * *', :retweet_mentions
+end
+```
+
+View the [Rufus-Scheduler](https://github.com/jmettraux/rufus-scheduler) documentation to see other examples of how to configure the schedule.
+
+### Launching Your Bot
+
+If you Ruby code so far is in a file called `my_bot.rb`, you can launch your bot with the following command in the terminal:
+
+```
+ruby my_bot.rb
 ```
 
 ## Development
