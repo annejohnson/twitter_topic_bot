@@ -103,6 +103,10 @@ If your Ruby code so far is in a file called `my_bot.rb`, you can launch your bo
 ruby my_bot.rb
 ```
 
+### Example File
+
+The code above is available in this (example file)[https://github.com/annejohnson/twitter_topic_bot/blob/master/examples/art_topic_bot.rb].
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
