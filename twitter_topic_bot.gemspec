@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = TwitterTopicBot::VERSION
   spec.authors       = ['Anne Johnson']
   spec.email         = ['annecodes@gmail.com']
+  spec.license       = 'MIT'
 
   spec.summary       = %q{A gem to create Twitter bots that tweet about topics of interest}
   spec.homepage      = 'https://github.com/annejohnson/twitter_topic_bot'
